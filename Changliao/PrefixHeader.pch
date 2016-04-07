@@ -1,0 +1,33 @@
+//
+//  PrefixHeader.pch
+//  Changliao
+//
+//  Created by metthew on 16/4/6.
+//  Copyright © 2016年 metthew. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#import "BaseViewController.h"
+#import "BaseNavViewController.h"
+
+#define SCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HIGHT  [UIScreen mainScreen].bounds.size.height
+
+
+#define LIGHT_GRAY_COLOR [UIColor colorWithRed:201/255.0 green:201/255.0 blue:201/255.0 alpha:1.0]
+#define MAIN_COLOR [UIColor colorWithRed:18/255.0 green:183/255.0 blue:245/255.0 alpha:1.0]
+
+
+
+
+
+
+
+
+#endif /* PrefixHeader_pch */

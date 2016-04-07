@@ -1,0 +1,90 @@
+PODS:
+  - DACircularProgress (2.3.1)
+  - EaseMobSDKFull (2.2.1)
+  - FXBlurView (1.6.3)
+  - JSONModel (1.1.0)
+  - JVFloatLabeledTextField (1.1.0)
+  - MBProgressHUD (0.9.1)
+  - MJRefresh (2.4.7)
+  - MLSelectPhoto (1.2.1)
+  - MWPhotoBrowser (2.1.1):
+    - DACircularProgress (~> 2.3)
+    - MBProgressHUD (~> 0.9)
+    - SDWebImage (!= 3.7.2, ~> 3.7)
+  - pop (1.0.7)
+  - REFormattedNumberField (1.1.5)
+  - RETableViewManager (1.6):
+    - REFormattedNumberField (~> 1.1.5)
+    - REValidation (~> 0.1.4)
+  - REValidation (0.1.4)
+  - SDWebImage (3.7.3):
+    - SDWebImage/Core (= 3.7.3)
+  - SDWebImage/Core (3.7.3)
+  - SWTableViewCell (0.3.7)
+  - Toast (2.4)
+  - TPKeyboardAvoiding (1.2.9)
+  - TTTAttributedLabel (1.13.4)
+  - VoiceConvert (0.0.2):
+    - VoiceConvert/amrwapper (= 0.0.2)
+    - VoiceConvert/opencore-amrnb (= 0.0.2)
+    - VoiceConvert/opencore-amrwb (= 0.0.2)
+    - VoiceConvert/VoiceConvert (= 0.0.2)
+  - VoiceConvert/amrwapper (0.0.2)
+  - VoiceConvert/opencore-amrnb (0.0.2)
+  - VoiceConvert/opencore-amrwb (0.0.2)
+  - VoiceConvert/VoiceConvert (0.0.2)
+
+DEPENDENCIES:
+  - EaseMobSDKFull (from `/Users/ZhouYuzhen/Documents/Git/IOS/EaseMobSDKFull`)
+  - FXBlurView (= 1.6.3)
+  - JSONModel (= 1.1.0)
+  - JVFloatLabeledTextField (= 1.1.0)
+  - MBProgressHUD (= 0.9.1)
+  - MJRefresh (= 2.4.7)
+  - MLSelectPhoto (= 1.2.1)
+  - MWPhotoBrowser (= 2.1.1)
+  - pop (= 1.0.7)
+  - RETableViewManager (= 1.6)
+  - SDWebImage (= 3.7.3)
+  - SWTableViewCell (= 0.3.7)
+  - Toast (= 2.4)
+  - TPKeyboardAvoiding (= 1.2.9)
+  - TTTAttributedLabel (= 1.13.4)
+  - VoiceConvert (from `/Users/ZhouYuzhen/Documents/Git/IOS/VoiceConvert`)
+
+EXTERNAL SOURCES:
+  EaseMobSDKFull:
+    :git: /Users/ZhouYuzhen/Documents/Git/IOS/EaseMobSDKFull
+  VoiceConvert:
+    :git: /Users/ZhouYuzhen/Documents/Git/IOS/VoiceConvert
+
+CHECKOUT OPTIONS:
+  EaseMobSDKFull:
+    :commit: c4a63a69518d396309e8d6c267f2756cac3877ee
+    :git: /Users/ZhouYuzhen/Documents/Git/IOS/EaseMobSDKFull
+  VoiceConvert:
+    :commit: cf7b1b953692bf3d1370ff837606eea211f32d7b
+    :git: /Users/ZhouYuzhen/Documents/Git/IOS/VoiceConvert
+
+SPEC CHECKSUMS:
+  DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
+  EaseMobSDKFull: 4a18d6ad47b4ccca564833963511bddd151e1654
+  FXBlurView: c6d23f3d35af2c6282296a2930f61c6e2c788d01
+  JSONModel: ec77e9865236a7a09d9cf7668df6b4b328d9ec1d
+  JVFloatLabeledTextField: ea4a3d8387ddd43724c472bb2b8ab39b79af05d4
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  MJRefresh: 6eb2f61338f89f64fd628fd43debcf479381ff59
+  MLSelectPhoto: 27a6e6c77d1efcd718413e8c4093b2769a8f1f3e
+  MWPhotoBrowser: ba0d0c09ffda3a7ea10093518738c502c1c7141c
+  pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
+  REFormattedNumberField: be3d55dd709f65541fb26b7e1709da07903147f8
+  RETableViewManager: 9667ecb29c005c32df40a1dd1828224840a351a2
+  REValidation: 38c4de1be58455f8b00aab208ac80db316a66b7f
+  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
+  Toast: 0773b8fc0e97352ca6054517bec7ebdd4110029d
+  TPKeyboardAvoiding: ff1ee4e5a5a0c119b965552af8f183868ea20207
+  TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
+  VoiceConvert: d22e56e9cc3d6787b7b2d9a62f1d7318e957bfe1
+
+COCOAPODS: 0.39.0
