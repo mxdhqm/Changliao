@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UApplyViewController.h"
 
 @interface MainController : UITabBarController
 

@@ -29,7 +29,8 @@ EM_ChatTableViewTapDelegate,
 EMChatManagerDelegate,
 UICollectionViewDataSource,
 UICollectionViewDelegate,
-UICollectionViewDelegateFlowLayout>
+UICollectionViewDelegateFlowLayout,
+EMChatManagerBuddyDelegate>
 
 @property (nonatomic, strong) UISearchDisplayController *searchController;
 @property (nonatomic, strong) EM_ChatOppositeTagBar *tableHeader;
@@ -493,12 +494,30 @@ UICollectionViewDelegateFlowLayout>
     }
 }
 
-- (void)didUpdateBuddyList:(NSArray *)buddyList changedBuddies:(NSArray *)changedBuddies isAdd:(BOOL)isAdd{
+
+//登录的用户被好友从列表中删除了
+- (void)didRemovedByBuddy:(NSString *)username{
+    [[EaseMob sharedInstance].chatManager asyncFetchBuddyList];
+}
+
+//通讯录信息发生变化时的通知
+- (void)didUpdateBuddyList:(NSArray *)buddyList changedBuddies:(NSArray *)changedBuddies isAdd:(BOOL)isAdd
+{
+//    [[EaseMob sharedInstance].chatManager asyncFetchBuddyList];
+}
+
+//接受添加好友
+- (void)didAcceptedByBuddy:(NSString *)username
+{
+    [[EaseMob sharedInstance].chatManager asyncFetchBuddyList];
+//    [self.tableView reloadData];
+}
+//拒绝添加好友
+- (void)didRejectedByBuddy:(NSString *)username
+{
     
 }
 
-- (void)didRemovedByBuddy:(NSString *)username{
-    
-}
+
 
 @end

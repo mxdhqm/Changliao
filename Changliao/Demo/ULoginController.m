@@ -157,7 +157,7 @@
     }
     
     if (!password || password.length == 0) {
-        [self.view makeToast:@"密码为必填项"];
+        [self.view makeToast:@"密码为s必填项"];
         return;
     }
     

@@ -32,6 +32,8 @@
     RERadioItem *pushStyleItem;
     RERadioItem *disturbItem;
     REDateTimeItem *disturbTimeItem;
+    
+    UIButton *btn;
 }
 
 - (instancetype)init{
@@ -112,6 +114,18 @@
         [sheet showInView:controller.view];
     }];
     [settingsSection addItem:disturbItem];
+    
+    
+    btn = [[UIButton alloc]initWithFrame:CGRectMake(50, SCREEN_HIGHT - 150, SCREEN_WIDTH - 100, 50)];
+    [btn setTitle:@"退出" forState:UIControlStateNormal];
+    [btn setBackgroundColor:[UIColor redColor]];
+    [btn addTarget:self action:@selector(LoginOutAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+}
+
+- (void)LoginOutAction
+{
+    [[EaseMob sharedInstance].chatManager asyncLogoffWithUnbindDeviceToken:YES];
 }
 
 #pragma mark - UIActionSheetDelegate

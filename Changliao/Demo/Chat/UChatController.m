@@ -8,9 +8,12 @@
 
 #import "UChatController.h"
 #import "UserCustomExtend.h"
+#import "MySliderViewController.h"
 
-@interface UChatController ()<EM_ChatControllerDelegate>
-
+@interface UChatController ()<EM_ChatControllerDelegate, UIActionSheetDelegate>
+{
+    MySliderViewController *slidervc;
+}
 @end
 
 @implementation UChatController
@@ -33,12 +36,58 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(Action)];
+    self.navigationItem.rightBarButtonItem = rightItem;
 }
 
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [slidervc setPanOff];
+
 }
+
+- (void)Action
+{
+    UIActionSheet *sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除好友" otherButtonTitles:@"黑名单", nil];
+    [sheet showInView:self.view];
+}
+
+#pragma mark - UIActionSheet
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        NSLog(@"删除好友");
+        EMError *error = nil;
+        // 删除好友
+        BOOL isSuccess = [[EaseMob sharedInstance].chatManager removeBuddy:self.title removeFromRemote:YES error:&error];
+        if (isSuccess && !error) {
+            NSLog(@"删除成功");
+            [[EaseMob sharedInstance].chatManager asyncFetchBuddyList];
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }
+    }
+    else if(buttonIndex == 1)
+    {
+        EMError *error = [[EaseMob sharedInstance].chatManager blockBuddy:self.title relationship:eRelationshipBoth];
+        if (!error) {
+            NSLog(@"发送成功");
+        }
+    }
+    else
+    {
+        NSLog(@"error");
+    }
+    
+
+}
+
+
 
 #define mark - EM_ChatControllerDelegate
 - (void)extendForMessage:(EM_ChatMessageModel *)message{

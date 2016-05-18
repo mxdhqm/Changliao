@@ -33,6 +33,9 @@
 #endif
 
 @interface AppDelegate ()<EMChatManagerDelegate>
+{
+    BOOL isLogin;
+}
 
 @end
 
@@ -49,11 +52,28 @@
     
     BOOL isAutoLogin = [[EaseMob sharedInstance].chatManager isAutoLoginEnabled];
     if (isAutoLogin) {
-        rootController = [[MainController alloc]init];
+//        rootController = [[MainController alloc]init];
         
+        MainController *rootvc = [[MainController alloc]init];
+        LeftViewController *leftvc = [[LeftViewController alloc]init];
+        MySliderViewController *slidervc = [[MySliderViewController alloc]init];
+        slidervc.rootVC = rootvc;
+        slidervc.leftVC = leftvc;
+        leftvc.delegate = slidervc;
+        rootController = [[BaseNavViewController alloc]initWithRootViewController:slidervc];
+        isLogin = true;
+//        if (isLogin) {
+//            NSLog(@"yes");
+//        }
+//        else
+//        {
+//            NSLog(@"no");
+//        }
         
     }else{
         rootController = [[UINavigationController alloc]initWithRootViewController:[[ULoginController alloc]init]];
+        isLogin = false;
+        
     }
     self.window.rootViewController = rootController;
     [self.window makeKeyAndVisible];
@@ -121,8 +141,18 @@
     BACK(^{
         sleep(1);
         MAIN(^{
-            if (![self.window.rootViewController isMemberOfClass:[MainController class]]) {
-                self.window.rootViewController = [[MainController alloc]init];
+//            if (![self.window.rootViewController isMemberOfClass:[MainController class]]) {
+//                self.window.rootViewController = [[MainController alloc]init];
+            if (isLogin) {
+                isLogin = true;
+                MainController *rootvc = [[MainController alloc]init];
+                LeftViewController *leftvc = [[LeftViewController alloc]init];
+                MySliderViewController *slidervc = [[MySliderViewController alloc]init];
+                slidervc.rootVC = rootvc;
+                slidervc.leftVC = leftvc;
+                leftvc.delegate = slidervc;
+                BaseNavViewController *rootController = [[BaseNavViewController alloc]initWithRootViewController:slidervc];
+                self.window.rootViewController = rootController;
             }
         });
     });
@@ -132,7 +162,9 @@
     BACK(^{
         sleep(1);
         MAIN(^{
-            if ([self.window.rootViewController isMemberOfClass:[MainController class]]) {
+//            if ([self.window.rootViewController isMemberOfClass:[MainController class]]) {
+            if (!isLogin){
+                isLogin = false;
                 self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:[[ULoginController alloc]init]];
             }
         });
@@ -144,8 +176,10 @@
     if (!error) {
         [[EaseMob sharedInstance].chatManager enableAutoLogin];
         [self.window makeToast:@"登录成功"];
+        isLogin = true;
         [self changeRootControllerToMain];
     }else{
+        isLogin = false;
         [self.window makeToast:error.description];
     }
 }
@@ -153,8 +187,10 @@
 - (void)willAutoLoginWithInfo:(NSDictionary *)loginInfo error:(EMError *)error{
     if (!error) {
         [self.window makeToast:@"自动登录中..."];
+        isLogin = true;
     }else{
         [self.window makeToast:error.description];
+        isLogin = false;
         [self changeRootControllerToLogin];
     }
 }
@@ -162,8 +198,10 @@
 - (void)didAutoLoginWithInfo:(NSDictionary *)loginInfo error:(EMError *)error{
     if (!error) {
         [self.window makeToast:@"自动登录完成"];
+        isLogin = true;
     }else{
         [self.window makeToast:error.description];
+        isLogin = false;
         [self changeRootControllerToLogin];
     }
 }
@@ -171,12 +209,14 @@
 - (void)didLogoffWithError:(EMError *)error{
     if (!error) {
         [self.window makeToast:@"已注销"];
+        isLogin = false;
         [self changeRootControllerToLogin];
     }
 }
 
 - (void)didLoginFromOtherDevice{
     [self.window makeToast:@"您的账号已在其他设备登录"];
+    isLogin = false;
     [self changeRootControllerToLogin];
 }
 
@@ -187,23 +227,38 @@
 - (void)didRegisterNewAccount:(NSString *)username password:(NSString *)password error:(EMError *)error{
     if (!error) {
         [self.window makeToast:@"注册成功"];
+        isLogin = true;
         [self changeRootControllerToMain];
     }else{
+        isLogin = false;
         [self.window makeToast:error.description];
     }
 }
 
-- (void)willAutoReconnect{
+
+// 好友申请回调
+- (void)didReceiveBuddyRequest:(NSString *)username message:(NSString *)message
+{
+    if (!username) {
+        return;
+    }
     
+    if (!message) {
+        message = [NSString stringWithFormat:NSLocalizedString(@"friend.somebodyAddWithName", @"%@ add you as a friend"), username];
+    }
+    
+    
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:@{@"title":username, @"username":username, @"applyMessage":message, @"applyStyle":[NSNumber numberWithInteger:ApplyStyleFriend]}];
+    [[UApplyViewController shareController] addNewApply:dic];
+//    if (self.mainController) {
+//        [self.mainController setupUntreatedApplyCount];
+//    }
 }
 
-- (void)didAutoReconnectFinishedWithError:(NSError *)error{
-    
-}
 
-#pragma mark - EMChatManagerUtilDelegate
-- (void)didConnectionStateChanged:(EMConnectionState)connectionState{
-    
-}
+
+
+
 
 @end
